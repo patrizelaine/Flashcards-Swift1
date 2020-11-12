@@ -1,5 +1,8 @@
 ## Flashcards
 
+### Group Members
+Patriz Elaine Daroy, Dakota Eckheart, Jordyn Sato, Christopher Sherman, Maximum Wilder-Smith
+
 ### App Description
 Flashcard application that allows the user to add multiple flashcards and toggle between different flashcards.
 
