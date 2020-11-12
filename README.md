@@ -1,4 +1,4 @@
-## Lab 4
+## Flashcards
 
 ### App Description
 Flashcard application that allows the user to add multiple flashcards and toggle between different flashcards.
