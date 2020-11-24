@@ -4,10 +4,7 @@
 Patriz Elaine Daroy, Dakota Eckheart, Jordyn Sato, Christopher Sherman, Maximum Wilder-Smith
 
 ### App Description
-Flashcard application that allows the user to add multiple flashcards and toggle between different flashcards.
+Study Tool application that allows the user to add use multiple flashcards, fill in the blank, and other productivity tools on an iOS app.
 
-- [x] User should see the app icon 
-- [x] User should see a splash screen
-- [x] User shuold see an flip animation when revealing the answer
-- [x] User should see a slide animation when going to the next flashcard
-- [x] User should see a slide animation when going to the previous flashcard
+### Features
+- [x] User should see a slide animation when going to the next and previous flashcard
