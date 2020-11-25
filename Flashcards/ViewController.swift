@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         
         if flashcards.count==0
         {
-            updateFlashcard(question: "What is my first name?", answer: "Patriz")
+            updateFlashcard(question: "Who is the best CS professor at CPP?", answer: "Dr. Yang")
         }
         else
         {
