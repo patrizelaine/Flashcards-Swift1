@@ -44,8 +44,6 @@ class ViewController: UIViewController {
             updateNextPrevButtons()
         }
         
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,18 +51,16 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func didTapOnFlashcard(_ sender: Any)
-    {
-        flipFlashcard()
-    }
-    
-    func flipFlashcard()
-    {
-        UIView.transition(with: card, duration: 0.3, options: .transitionFlipFromRight, animations: {
-            self.frontLabel.isHidden = true
-        })
-
-    }
+    @IBAction func didTapOnFlashcard(_ sender: Any) {
+           if(frontLabel.isHidden == false)
+           {
+               frontLabel.isHidden = true;
+           }
+           else
+           {
+               frontLabel.isHidden = false;
+           }
+       }
     
     func updateFlashcard(question: String, answer: String)
     {
