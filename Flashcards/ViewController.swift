@@ -12,7 +12,7 @@ struct Flashcard {
     var answer: String
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     var flashcardsController: ViewController!
     var alert: UIAlertController!
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
             updateLabels()
             updateNextPrevButtons()
         }
-        
+        //self.answerAttemptField.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,10 +53,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-  /*  @IBAction func didTapOnCheck(_ sender: Any) {
-        let userAttemptAnswer = answerAttemptField.text
+    @IBAction func didTapOnCheck(_ sender: Any) {
+        userAttemptAnswer = answerAttemptField.text ?? ""
+        checkAnswer(question: flashcards[currentIndex].question, answer: flashcards[currentIndex].answer)
         print (userAttemptAnswer)
-    }*/
+    }
     
     func checkAnswer(question: String, answer: String)
     {
@@ -193,15 +194,15 @@ class ViewController: UIViewController {
         
         print("Flashcards saved to UserDefaults")
     
-    func readSavedFlashcards () {
-        if let dictionaryArray = UserDefaults.standard.array (forKey: "flashcards") as? [[String:String]]{
-            
-            let savedCards = dictionaryArray.map{ dictionary -> Flashcard in return Flashcard(question:dictionary["question"]!, answer:dictionary["answer"]!)
+        func readSavedFlashcards () {
+            if let dictionaryArray = UserDefaults.standard.array (forKey: "flashcards") as? [[String:String]]{
                 
+                let savedCards = dictionaryArray.map{ dictionary -> Flashcard in return Flashcard(question:dictionary["question"]!, answer:dictionary["answer"]!)
+                    
+                }
+                flashcards.append(contentsOf: savedCards)
             }
-            flashcards.append(contentsOf: savedCards)
         }
     }
-}
 }
 
