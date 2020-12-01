@@ -12,15 +12,17 @@ struct Flashcard {
     var answer: String
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     var flashcardsController: ViewController!
     var alert: UIAlertController!
     var flashcards = [Flashcard]()
     var currentIndex = 0;
+    var userAttemptAnswer: String = ""
     
     @IBOutlet weak var frontLabel: UILabel!
     @IBOutlet weak var backLabel: UILabel!
+    @IBOutlet weak var answerAttemptField: UITextField!
     @IBOutlet weak var prevButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var card: UIView!
@@ -43,12 +45,36 @@ class ViewController: UIViewController {
             updateLabels()
             updateNextPrevButtons()
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func didTapOnCheck(_ sender: Any) {
+        userAttemptAnswer = answerAttemptField.text ?? ""
+        checkAnswer(question: flashcards[currentIndex].question, answer: flashcards[currentIndex].answer)
+        print (userAttemptAnswer)
+    }
+    
+    func checkAnswer(question: String, answer: String)
+    {
+        let flashcard = Flashcard (question: question, answer: answer)
+        if(userAttemptAnswer == flashcard.answer)
+        {
+            answerAttemptField.layer.borderColor = UIColor.clear.cgColor
+            answerAttemptField.layer.borderWidth = 0
+            if(frontLabel.isHidden == false)
+            {
+                frontLabel.isHidden = true;
+            }
+        }
+        else {
+            answerAttemptField.layer.borderColor = UIColor.red.cgColor
+            answerAttemptField.layer.borderWidth = 1.0
+            answerAttemptField.layer.cornerRadius = 5.0
+        }
     }
 
     @IBAction func didTapOnFlashcard(_ sender: Any) {
@@ -85,7 +111,7 @@ class ViewController: UIViewController {
         let creationController = navigationController.topViewController as! CreationViewController
         
         creationController.flashcardsController = self
-        //we set the flashcardcontroller property to self
+        
         if segue.identifier == "EditSegue"{
             creationController.initialQuestion = frontLabel.text
             creationController.initialAnswer = backLabel.text
@@ -174,15 +200,15 @@ class ViewController: UIViewController {
         
         print("Flashcards saved to UserDefaults")
     
-    func readSavedFlashcards () {
-        if let dictionaryArray = UserDefaults.standard.array (forKey: "flashcards") as? [[String:String]]{
-            
-            let savedCards = dictionaryArray.map{ dictionary -> Flashcard in return Flashcard(question:dictionary["question"]!, answer:dictionary["answer"]!)
+        func readSavedFlashcards () {
+            if let dictionaryArray = UserDefaults.standard.array (forKey: "flashcards") as? [[String:String]]{
                 
+                let savedCards = dictionaryArray.map{ dictionary -> Flashcard in return Flashcard(question:dictionary["question"]!, answer:dictionary["answer"]!)
+                    
+                }
+                flashcards.append(contentsOf: savedCards)
             }
-            flashcards.append(contentsOf: savedCards)
         }
     }
-}
 }
 
