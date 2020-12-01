@@ -18,9 +18,11 @@ class ViewController: UIViewController {
     var alert: UIAlertController!
     var flashcards = [Flashcard]()
     var currentIndex = 0;
+    var userAttemptAnswer: String = ""
     
     @IBOutlet weak var frontLabel: UILabel!
     @IBOutlet weak var backLabel: UILabel!
+    @IBOutlet weak var answerAttemptField: UITextField!
     @IBOutlet weak var prevButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var card: UIView!
@@ -49,6 +51,23 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+  /*  @IBAction func didTapOnCheck(_ sender: Any) {
+        let userAttemptAnswer = answerAttemptField.text
+        print (userAttemptAnswer)
+    }*/
+    
+    func checkAnswer(question: String, answer: String)
+    {
+        let flashcard = Flashcard (question: question, answer: answer)
+        if(userAttemptAnswer == flashcard.answer)
+        {
+            if(frontLabel.isHidden == false)
+            {
+                frontLabel.isHidden = true;
+            }
+        }
     }
 
     @IBAction func didTapOnFlashcard(_ sender: Any) {
@@ -85,7 +104,7 @@ class ViewController: UIViewController {
         let creationController = navigationController.topViewController as! CreationViewController
         
         creationController.flashcardsController = self
-        //we set the flashcardcontroller property to self
+        
         if segue.identifier == "EditSegue"{
             creationController.initialQuestion = frontLabel.text
             creationController.initialAnswer = backLabel.text
