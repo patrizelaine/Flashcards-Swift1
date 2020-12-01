@@ -64,10 +64,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let flashcard = Flashcard (question: question, answer: answer)
         if(userAttemptAnswer == flashcard.answer)
         {
+            answerAttemptField.layer.borderColor = UIColor.clear.cgColor
+            answerAttemptField.layer.borderWidth = 0
             if(frontLabel.isHidden == false)
             {
                 frontLabel.isHidden = true;
             }
+        }
+        else {
+            answerAttemptField.layer.borderColor = UIColor.red.cgColor
+            answerAttemptField.layer.borderWidth = 1.0
+            answerAttemptField.layer.cornerRadius = 5.0
         }
     }
 
