@@ -68,9 +68,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if(frontLabel.isHidden == false)
             {
                 frontLabel.isHidden = true;
+                answerAttemptField.text = "";
+                answerAttemptField.layer.borderColor = UIColor.gray.cgColor;
             }
         }
         else {
+            answerAttemptField.text = "";
             answerAttemptField.layer.borderColor = UIColor.red.cgColor
             answerAttemptField.layer.borderWidth = 1.0
             answerAttemptField.layer.cornerRadius = 5.0
@@ -91,6 +94,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func updateFlashcard(question: String, answer: String)
     {
         let flashcard = Flashcard (question: question, answer: answer)
+        answerAttemptField.layer.borderColor = UIColor.gray.cgColor;
         frontLabel.text = flashcard.question
         backLabel.text = flashcard.answer
         flashcards.append(flashcard)
@@ -120,10 +124,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func updateLabels() {
         let currentFlashcard = flashcards [currentIndex]
+        frontLabel.isHidden = false;
         frontLabel.text = currentFlashcard.question
         backLabel.text = currentFlashcard.answer
         
     }
+    
     func updateNextPrevButtons () {
         if currentIndex == flashcards.count - 1 {
             nextButton.isEnabled = false
@@ -141,6 +147,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func didTapOnPrev(_ sender: Any) {
+        answerAttemptField.layer.borderColor = UIColor.gray.cgColor;
         currentIndex = currentIndex - 1
         print("current Index", currentIndex)
         updateLabels()
@@ -149,6 +156,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func didTapOnNext(_ sender: Any) {
+        answerAttemptField.layer.borderColor = UIColor.gray.cgColor;
         currentIndex = currentIndex + 1
         updateLabels()
         updateNextPrevButtons()
