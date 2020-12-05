@@ -1,11 +1,3 @@
-//
-//  FlashcardsUITests.swift
-//  FlashcardsUITests
-//
-//  Created by Patriz Daroy on 10/18/18.
-//  Copyright © 2018 Patriz Elaine Daroy. All rights reserved.
-//
-
 import XCTest
 
 class FlashcardsUITests: XCTestCase {
